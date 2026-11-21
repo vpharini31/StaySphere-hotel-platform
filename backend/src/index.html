@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotelMS - Premium Stays</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
+
+    <!-- Reusable Modal Overlay -->
+    <div id="modal-overlay" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h2 id="modal-title"></h2>
+            <div id="modal-body"></div>
+            <div id="modal-footer"></div>
+            <button id="modal-close" class="modal-close">&times;</button>
+        </div>
+    </div>
+
+    <!-- Hero & Login Screen -->
+    <div id="login-screen" class="login-screen">
+        <div class="hero-section">
+            <div class="hero-content">
+                <h1>Discover Your Next Adventure</h1>
+                <p>Book premium hotels, villas, and exclusive stays worldwide.</p>
+            </div>
+        </div>
+        
+        <div class="login-container">
+            <div class="login-card card">
+                <h2 style="margin-bottom: 1.5rem; text-align: center;">Welcome to HotelMS</h2>
+                
+                <div class="tabs">
+                    <button id="tab-customer" class="tab-btn active">Guest Portal</button>
+                    <button id="tab-manager" class="tab-btn">Staff / Admin</button>
+                </div>
+                
+                <div id="login-error" class="alert alert-error" style="display: none;"></div>
+                <div id="login-success" class="alert alert-success" style="display: none;"></div>
+
+                <div id="view-customer" class="login-view">
+                    <input type="text" id="cust-user" class="form-control" placeholder="Username (e.g. guest)">
+                    <input type="password" id="cust-pass" class="form-control" placeholder="Password">
+                    <button id="cust-login-btn" class="btn btn-primary w-100">Sign In as Guest</button>
+                    <button class="btn btn-outline w-100 mt-1" onclick="App.doGoogleAuth('guest')">Continue with Google</button>
+                </div>
+
+                <div id="view-manager" class="login-view" style="display: none;">
+                    <input type="text" id="mgr-user" class="form-control" placeholder="Manager or Admin Username">
+                    <input type="password" id="mgr-pass" class="form-control" placeholder="Password">
+                    <button id="mgr-login-btn" class="btn btn-primary w-100">Sign In to Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application Shell (Sidebar + Content) -->
+    <div id="app" class="app-container" style="display: none;">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>HotelMS</h2>
+                <button class="theme-toggle" id="theme-btn">🌙</button>
+            </div>
+            <div class="sidebar-user">
+                <div class="avatar">👤</div>
+                <span id="sidebar-username">User</span>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-page="search">🌍 Explore Stays</button>
+                <button class="nav-item" data-page="my-bookings">📅 My Bookings</button>
+                <button class="nav-item" data-page="dashboard">📊 Dashboard</button>
+                <button class="nav-item" data-page="bookings">📖 Manage Bookings</button>
+                <button class="nav-item" data-page="rooms">🛏️ Rooms</button>
+                <button class="nav-item" data-page="reports">📈 Analytics</button>
+                <button class="nav-item" data-page="hotel">🏨 Approvals</button>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-secondary w-100">Sign Out</button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <!-- Routing Views -->
+            <div id="page-search" class="page">
+                <h1>Featured Destinations</h1>
+                <p class="text-muted mb-1">Hand-picked luxury stays around the world.</p>
+                <div id="hotel-results-container" class="grid grid-cols-3 mt-2">
+                    <!-- Hotels injected via JS -->
+                </div>
+            </div>
+            
+            <div id="page-my-bookings" class="page" style="display: none;"><h1>My Bookings</h1></div>
+            
+            <div id="page-dashboard" class="page" style="display: none;">
+                <h1>Manager Dashboard</h1>
+                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                    <div class="stat-card card">
+                        <h3 class="text-muted">Occupancy</h3>
+                        <p style="font-size: 2.5rem; font-weight: bold; color: var(--primary);">78%</p>
+                    </div>
+                    <div class="stat-card card">
+                        <h3 class="text-muted">Today's Revenue</h3>
+                        <p style="font-size: 2.5rem; font-weight: bold; color: var(--success);">₹45,200</p>
+                    </div>
+                    <div class="stat-card card">
+                        <h3 class="text-muted">Pending Check-ins</h3>
+                        <p style="font-size: 2.5rem; font-weight: bold; color: var(--warning);">12</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="page-bookings" class="page" style="display: none;"><h1>Manage Bookings</h1></div>
+            <div id="page-rooms" class="page" style="display: none;"><h1>Room Management</h1></div>
+            
+            <div id="page-reports" class="page" style="display: none;">
+                <h1>Super Admin Analytics</h1>
+                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                    <div class="stat-card card">
+                        <h3 class="text-muted">Total Hotels</h3>
+                        <p style="font-size: 2.5rem; font-weight: bold; color: var(--primary);">24</p>
+                    </div>
+                    <div class="stat-card card">
+                        <h3 class="text-muted">Total Users</h3>
+                        <p style="font-size: 2.5rem; font-weight: bold;">1,205</p>
+                    </div>
+                    <div class="stat-card card">
+                        <h3 class="text-muted">Platform Revenue</h3>
+                        <p style="font-size: 2.5rem; font-weight: bold; color: var(--success);">₹1.2M</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="page-hotel" class="page" style="display: none;">
+                <h1>Hotel Verification Queue</h1>
+                <p class="text-muted">Approve or reject newly registered hotels.</p>
+                <div class="card mt-1">
+                    <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <th style="padding: 1rem;">Hotel Name</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem;">Seaside Resort</td>
+                            <td>Goa</td>
+                            <td><span class="badge badge-warning">Pending</span></td>
+                            <td><button class="btn btn-primary" style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">Approve</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Load Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+      // Placeholder stubs for individual page renderers (implemented in later phases)
+      Pages.dashboard = { render: () => {} }; Pages.bookings = { render: () => {} };
+      Pages.newBooking = { render: () => {} }; Pages.rooms = { render: () => {} };
+      Pages.reports = { render: () => {} };
+      Pages.hotel = { render: () => {} };
+    </script>
+</body>
+</html>

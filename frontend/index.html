@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StaySphere | Hotel Booking Platform</title>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div id="public-app">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="StaySphere home">
+        <span class="brand-mark">S</span>
+        <span>StaySphere</span>
+      </a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="public-nav" id="public-nav">
+        <a href="#home">Home</a>
+        <a href="#hotels">Hotels</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#deals">Deals</a>
+        <a href="#reviews">Reviews</a>
+        <button class="link-btn" data-auth="login">Login</button>
+        <button class="link-btn" data-auth="register">Register</button>
+        <button class="partner-btn" data-auth="partner">Become a Partner</button>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">Dark</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <img class="hero-bg"
+          src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85"
+          alt="Luxury resort pool at sunset">
+        <div class="hero-overlay"></div>
+        <div class="hero-content reveal">
+          <p class="eyebrow">Premium stays, verified hotels, instant booking</p>
+          <h1>StaySphere</h1>
+          <p class="hero-copy">Search boutique hotels, city business stays, villas, resorts, and luxury escapes with one
+            connected hotel platform.</p>
+          <form class="search-panel" id="public-search-form">
+            <label>
+              <span>Destination</span>
+              <input id="search-location" name="location" placeholder="Goa, Mumbai, Udaipur">
+            </label>
+            <label>
+              <span>Check-in</span>
+              <input id="search-checkin" name="checkin" type="date">
+            </label>
+            <label>
+              <span>Guests</span>
+              <input id="search-guests" name="guests" type="number" min="1" value="2">
+            </label>
+            <button class="primary-btn" type="submit">Search Stays</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="section homepage-section section-hotels reveal" id="hotels">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Featured hotels</p>
+            <h2>Top rated stays for your next trip</h2>
+          </div>
+          <div class="filter-row">
+            <input id="hotel-filter-text" placeholder="Search hotel or city">
+            <select id="hotel-filter-rating">
+              <option value="">Any rating</option>
+              <option value="4">4+ stars</option>
+              <option value="5">5 stars</option>
+            </select>
+          </div>
+        </div>
+        <div class="hotel-grid" id="featured-hotels"></div>
+      </section>
+
+      <section class="section homepage-section destinations-section section-mist reveal" id="destinations">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Popular destinations</p>
+            <h2>Explore cities guests keep coming back to</h2>
+          </div>
+          <a class="text-link" href="#hotels">View curated stays</a>
+        </div>
+        <div class="destination-grid" id="destination-grid"></div>
+      </section>
+
+      <section class="section homepage-section section-luxury reveal" id="luxury">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Luxury resorts</p>
+            <h2>Resorts, villas, and city icons</h2>
+          </div>
+        </div>
+        <div class="luxury-strip">
+          <article>
+            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=80"
+              alt="Beach villa stay">
+            <h3>Private villas</h3>
+            <p>Kitchenettes, patios, and long-stay pricing.</p>
+          </article>
+          <article>
+            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=900&q=80"
+              alt="Luxury resort">
+            <h3>Resort retreats</h3>
+            <p>Spa, pool, breakfast, and curated activities.</p>
+          </article>
+          <article>
+            <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=900&q=80"
+              alt="Hotel room">
+            <h3>Business hotels</h3>
+            <p>Fast check-in, invoices, and manager dashboards.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section homepage-section section-deals reveal" id="deals">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Special deals</p>
+            <h2>Exclusive deals for smarter trips</h2>
+          </div>
+        </div>
+        <div class="deal-grid">
+          <article class="deal-card deal-card-large">
+            <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=900&q=80"
+              alt="Resort deal">
+            <div>
+              <span>Up to 20% off</span>
+              <h3>Summer Escape</h3>
+              <p>Premium beachside resorts with breakfast, spa credits, and flexible cancellation.</p>
+            </div>
+          </article>
+          <article class="deal-card">
+            <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=900&q=80"
+              alt="Business stay deal">
+            <div>
+              <span>Corporate perks</span>
+              <h3>Business Stay Bundles</h3>
+              <p>GST-ready invoices, quick check-in, and weekday member pricing.</p>
+            </div>
+          </article>
+          <article class="deal-card">
+            <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=900&q=80"
+              alt="Villa deal">
+            <div>
+              <span>Long stay rates</span>
+              <h3>Villa Monthlies</h3>
+              <p>Private villas for families, remote teams, and extended luxury escapes.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section homepage-section section-features reveal" id="why-choose">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Why choose StaySphere</p>
+            <h2>A premium booking experience from search to checkout</h2>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span>01</span>
+            <h3>Verified hotel partners</h3>
+            <p>Every listed property can be reviewed through partner onboarding, documents, policies, and admin approval
+              flows.</p>
+          </article>
+          <article class="feature-card">
+            <span>02</span>
+            <h3>Luxury stays and transparent rates</h3>
+            <p>Compare resorts, villas, business hotels, ratings, amenities, nightly pricing, and deals in one polished
+              marketplace.</p>
+          </article>
+          <article class="feature-card">
+            <span>03</span>
+            <h3>Guest-ready booking tools</h3>
+            <p>Wishlists, bookings, reviews, payment options, receipts, and hotel policies stay connected across the
+              guest portal.</p>
+          </article>
+          <article class="feature-card">
+            <span>04</span>
+            <h3>Professional hotel operations</h3>
+            <p>Managers can track rooms, staff, reports, payouts, bookings, guests, and service quality from a unified
+              dashboard.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section homepage-section testimonials section-reviews reveal" id="reviews">
+        <div>
+          <p class="eyebrow">Customer reviews</p>
+          <h2>Trusted by guests and hotel teams</h2>
+          <p class="section-copy">A calm, polished booking experience for leisure trips, work stays, long stays, and
+            hotel operations.</p>
+        </div>
+        <div class="testimonial-carousel">
+          <article><span>9.8</span>
+            <p>"The hotel cards are easy to scan, and the details page made policies, rooms, and pricing clear before
+              booking."</p><strong>Aarav M.</strong><small>Guest, Mumbai</small>
+          </article>
+          <article><span>9.6</span>
+            <p>"As a manager, I can track rooms, revenue, staff, approvals, guests, and reviews from one dashboard."</p>
+            <strong>Nisha R.</strong><small>Hotel partner, Udaipur</small>
+          </article>
+          <article><span>9.4</span>
+            <p>"The platform feels premium enough for luxury stays but still practical for business travel and
+              invoices."</p><strong>Dev P.</strong><small>Corporate traveler</small>
+          </article>
+          <article><span>9.7</span>
+            <p>"The admin approval workflow makes partner onboarding easier to control without slowing down operations."
+            </p><strong>Platform Ops</strong><small>Marketplace team</small>
+          </article>
+        </div>
+      </section>
+
+      <section class="section homepage-section split-cta section-partner reveal" id="partners">
+        <div>
+          <p class="eyebrow">Partner with us</p>
+          <h2>Bring your hotel, villa, or resort to a premium travel audience</h2>
+          <p>StaySphere gives hotel partners a verified marketplace presence, booking management, room inventory,
+            commission tracking, and operational dashboards built for production teams.</p>
+          <div class="button-row">
+            <button class="primary-btn" data-auth="partner">List your property</button>
+            <a class="secondary-btn" href="#hotels">Explore marketplace</a>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1200&q=82"
+          alt="Luxury hotel lobby">
+      </section>
+
+
+    </main>
+
+    <footer class="footer">
+      <div class="footer-brand">
+        <a class="brand" href="#home" aria-label="StaySphere home">
+          <span class="brand-mark">S</span>
+          <span>StaySphere</span>
+        </a>
+        <p>Premium hotel booking and marketplace operations for verified hotels, villas, resorts, and city stays.</p>
+        <div class="social-row" aria-label="Social links">
+          <a href="#home" aria-label="Instagram">Ig</a>
+          <a href="#home" aria-label="X">X</a>
+          <a href="#home" aria-label="LinkedIn">In</a>
+          <a href="#home" aria-label="Facebook">Fb</a>
+        </div>
+      </div>
+      <div class="footer-grid">
+        <nav>
+          <h3>Company</h3>
+          <a href="#home">About StaySphere</a>
+          <a href="#hotels">Featured hotels</a>
+          <a href="#destinations">Destinations</a>
+          <a href="#reviews">Guest stories</a>
+        </nav>
+        <nav>
+          <h3>Support</h3>
+          <a href="#home">Help center</a>
+          <a href="#home">Contact support</a>
+          <a href="#home">Cancellation support</a>
+          <a href="#home">Payment help</a>
+        </nav>
+        <nav>
+          <h3>Legal</h3>
+          <a href="#home">Terms of service</a>
+          <a href="#home">Privacy policy</a>
+          <a href="#home">Refund rules</a>
+          <a href="#home">Trust and safety</a>
+        </nav>
+        <nav>
+          <h3>Partner</h3>
+          <button class="link-btn" data-auth="partner">List your property</button>
+          <a href="#partners">Partner dashboard</a>
+          <a href="#partners">Hotel verification</a>
+          <a href="#partners">Commission and payouts</a>
+        </nav>
+      </div>
+      <div class="footer-contact">
+        <span>support@staysphere.local</span>
+        <span>+91 98765 43210</span>
+        <span>Mumbai, Maharashtra</span>
+      </div>
+      <div class="footer-bottom">
+        <span>Copyright 2026 StaySphere. All rights reserved.</span>
+        <span>Verified stays. Premium booking. Professional hotel operations.</span>
+      </div>
+    </footer>
+  </div>
+
+  <div id="portal-app" class="portal-app hidden">
+    <header class="portal-navbar">
+      <button class="portal-brand portal-brand-button" data-portal="dashboard" aria-label="Go home">
+        <span class="brand-mark">S</span>
+        <div>
+          <strong>StaySphere</strong>
+          <small id="portal-role-label">Portal</small>
+        </div>
+      </button>
+      <button class="portal-menu-toggle" id="portal-menu-toggle" aria-label="Open navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="portal-nav" class="portal-nav"></nav>
+      <div class="portal-actions">
+        <button class="portal-icon-btn" data-portal="wishlist" aria-label="Wishlist" title="Wishlist">&#9825;</button>
+
+        <button class="theme-toggle" id="portal-theme-toggle">Dark</button>
+        <button class="portal-avatar" id="portal-avatar" data-portal="profile" aria-label="Profile">U</button>
+        <div>
+          <strong id="portal-user-name">User</strong>
+          <small id="portal-user-meta">Signed in</small>
+        </div>
+        <button id="logout-btn" class="ghost-btn">Logout</button>
+      </div>
+    </header>
+    <main class="portal-main">
+      <section class="portal-hero">
+        <div>
+          <p class="eyebrow" id="portal-kicker">Dashboard</p>
+          <h1 id="portal-title">Welcome</h1>
+          <p class="portal-hero-copy" id="portal-subtitle">Track performance, manage reservations, monitor occupancy,and
+            grow your property with StaySphere.</p>
+        </div>
+      </section>
+      <section id="portal-view" class="portal-view"></section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="auth-modal">
+    <section class="modal auth-card">
+      <button class="modal-close" id="auth-close" aria-label="Close">x</button>
+      <div class="auth-visual">
+        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=900&q=80"
+          alt="Hotel lobby">
+      </div>
+      <div class="auth-body">
+        <div class="segmented" id="auth-mode-tabs">
+          <button data-mode="login" class="active">Login</button>
+          <button data-mode="register">Register</button>
+          <button data-mode="partner">Partner</button>
+        </div>
+        <h2 id="auth-title">Welcome back</h2>
+        <p id="auth-subtitle">Sign in to continue.</p>
+        <form id="auth-form" class="stack-form"></form>
+
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop hidden" id="details-modal">
+    <section class="modal details-modal">
+      <button class="modal-close" data-close-details aria-label="Close">x</button>
+      <div id="details-content"></div>
+    </section>
+  </div>
+
+  <div id="toast-stack" class="toast-stack"></div>
+
+  <script src="js/api.js?v=1.0.1"></script>
+  <script src="js/app.js?v=1.0.1"></script>
+</body>
+
+</html>
